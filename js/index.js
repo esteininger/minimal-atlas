@@ -182,7 +182,7 @@ function renderClusters(clusters) {
   })
   // init
   initDeleteButtons();
-  // initPauseButtons();
+  initPauseButtons();
 }
 
 // init buttons
@@ -193,10 +193,15 @@ function initPauseButtons() {
   $.each(pauseButtons, function(index, button) {
     $(button).click(function(e) {
       let item = $(this);
+      // let paused = false;
+
+      // TODO: check if pause or resume and modify accordingly
+
+
       $.ajax({
           url: `${baseURL}/pauseCluster`,
           method: 'PATCH',
-          data: JSON.stringify({"clusterName":item.attr('data-name'), "paused":false}),
+          data: JSON.stringify({"clusterName":item.attr('data-name'), "paused":true})
         }).done(function(clusters) {
           loadClusters();
         })
