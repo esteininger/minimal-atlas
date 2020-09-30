@@ -29,7 +29,7 @@ body {
 }
 
 .banner-img {
-	padding: 5px 5px 0;
+	padding: 20px 20px 0;
 }
 
 .banner-img img {
@@ -88,7 +88,6 @@ body {
 .stats div:nth-of-type(3){border:none;}
 
 div.footer {
-	text-align: right;
 	position: relative;
 	margin: 20px 5px;
 }
@@ -113,6 +112,15 @@ div.footer a.Cbtn-primary:hover{
 	background-color: #7dbef5;
 }
 
+div.footer a.Cbtn-warning{
+	background-color: #ffc107;
+	color: #FFF;
+}
+
+div.footer a.Cbtn-warning:hover{
+	background-color: #d39e00;
+}
+
 div.footer a.Cbtn-danger{
 	background-color: #fc5a5a;
 	color: #FFF;
@@ -120,4 +128,16 @@ div.footer a.Cbtn-danger{
 
 div.footer a.Cbtn-danger:hover{
 	background-color: #fd7676;
+}
+
+.left-right-padding {
+	padding-left: 10em;
+	padding-right: 10em;
+}
+
+.center-modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -1,0 +1,97 @@
+[
+  {
+    "instance_size": "M2",
+    "default_storage": "2 GB",
+    "default_ram": "Shared"
+  },
+  {
+    "instance_size": "M5",
+    "default_storage": "5 GB",
+    "default_ram": "Shared"
+  },
+  {
+    "instance_size": "M10",
+    "default_storage": "10 GB",
+    "default_ram": "1.7 GB"
+  },
+  {
+    "instance_size": "M20",
+    "default_storage": "20 GB",
+    "default_ram": "3.8 GB"
+  },
+  {
+    "instance_size": "M30",
+    "default_storage": "40 GB",
+    "default_ram": "7.5 GB"
+  },
+  {
+    "instance_size": "M40",
+    "default_storage": "80 GB",
+    "default_ram": "15 GB"
+  },
+  {
+    "instance_size": "M40 Low-CPU (R40) 2",
+    "default_storage": "80 GB",
+    "default_ram": "16 GB"
+  },
+  {
+    "instance_size": "M50",
+    "default_storage": "160 GB",
+    "default_ram": "30 GB"
+  },
+  {
+    "instance_size": "M50 Low-CPU (R50) 2",
+    "default_storage": "160 GB",
+    "default_ram": "32 GB"
+  },
+  {
+    "instance_size": "M60",
+    "default_storage": "320 GB",
+    "default_ram": "60 GB"
+  },
+  {
+    "instance_size": "M60 Low-CPU (R60) 2",
+    "default_storage": "320 GB",
+    "default_ram": "64 GB"
+  },
+  {
+    "instance_size": "M80",
+    "default_storage": "750 GB",
+    "default_ram": "120 GB"
+  },
+  {
+    "instance_size": "M80 Low-CPU (R80) 2",
+    "default_storage": "750 GB",
+    "default_ram": "128 GB"
+  },
+  {
+    "instance_size": "M200",
+    "default_storage": "1500 GB",
+    "default_ram": "240 GB"
+  },
+  {
+    "instance_size": "M200 Low-CPU (R200) 2",
+    "default_storage": "1500 GB",
+    "default_ram": "256 GB"
+  },
+  {
+    "instance_size": "M300 1",
+    "default_storage": "2000 GB",
+    "default_ram": "360 GB"
+  },
+  {
+    "instance_size": "M300 Low-CPU (R300) 2",
+    "default_storage": "2000 GB",
+    "default_ram": "384 GB"
+  },
+  {
+    "instance_size": "M400 Low-CPU (R400) 2",
+    "default_storage": "3000 GB",
+    "default_ram": "512 GB"
+  },
+  {
+    "instance_size": "M400 Low-CPU (R600) 2",
+    "default_storage": "4096 GB",
+    "default_ram": "640 GB"
+  }
+]

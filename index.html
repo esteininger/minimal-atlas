@@ -3,330 +3,80 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
 
-
-
-
-
 <div class="container-fluid">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top left-right-padding">
+    <a class="navbar-brand" href="#">Minimal Atlas</a>
+    <button
+      class="btn btn-outline-success my-2 my-sm-0 ml-auto float-xs-right"
+      type="submit"
+      data-toggle="modal"
+      data-target="#createClusterModal">
+      Create Cluster
+    </button>
   </nav>
 
+  <div class="container">
+    <div class="row" style="padding-top: 5em;" id="placeholder">
 
-  <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-      <div class="tile">
-        <div class="wrapper">
-          <div class="header">Event Title</div>
-
-          <div class="banner-img">
-            <img src="http://via.placeholder.com/640x360" alt="Image 1">
-          </div>
-
-          <div class="dates">
-            <div class="start">
-              <strong>STARTS</strong> 12:30 JAN 2015
-              <span></span>
-            </div>
-            <div class="ends">
-              <strong>ENDS</strong> 14:30 JAN 2015
-            </div>
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="footer">
-            <a href="#" class="Cbtn Cbtn-primary">View</a>
-            <a href="#" class="Cbtn Cbtn-danger">Delete</a>
-          </div>
-        </div>
-      </div>
     </div>
+  </div>
+</div>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-      <div class="tile">
-        <div class="wrapper">
-          <div class="header">Event Title</div>
 
-          <div class="banner-img">
-            <img src="http://via.placeholder.com/640x360" alt="Image 1">
-          </div>
 
-          <div class="dates">
-            <div class="start">
-              <strong>STARTS</strong> 12:30 JAN 2015
-              <span></span>
-            </div>
-            <div class="ends">
-              <strong>ENDS</strong> 14:30 JAN 2015
-            </div>
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="footer">
-            <a href="#" class="Cbtn Cbtn-primary">View</a>
-            <a href="#" class="Cbtn Cbtn-danger">Delete</a>
-          </div>
-        </div>
+<div class="modal fade center-modal" id="createClusterModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Cluster</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-      <div class="tile">
-        <div class="wrapper">
-          <div class="header">Event Title</div>
-
-          <div class="banner-img">
-            <img src="http://via.placeholder.com/640x360" alt="Image 1">
-          </div>
-
-          <div class="dates">
-            <div class="start">
-              <strong>STARTS</strong> 12:30 JAN 2015
-              <span></span>
-            </div>
-            <div class="ends">
-              <strong>ENDS</strong> 14:30 JAN 2015
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="name" class="form-control" placeholder="Cluster Name">
             </div>
           </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">RAM</label>
+            <div class="col-sm-10">
+              <select name="ram" class="form-control">
+                <option>1</option>
+              </select>
             </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
           </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Storage</label>
+            <div class="col-sm-10">
+              <select name="storage" class="form-control">
+                <option>1</option>
+              </select>
             </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
           </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Version</label>
+            <div class="col-sm-10">
+              <select name="version" class="form-control">
+                <option>1</option>
+              </select>
             </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
           </div>
-
-          <div class="footer">
-            <a href="#" class="Cbtn Cbtn-primary">View</a>
-            <a href="#" class="Cbtn Cbtn-danger">Delete</a>
-          </div>
-        </div>
+        </form>
       </div>
-    </div>
-
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-      <div class="tile">
-        <div class="wrapper">
-          <div class="header">Event Title</div>
-
-          <div class="banner-img">
-            <img src="http://via.placeholder.com/640x360" alt="Image 1">
-          </div>
-
-          <div class="dates">
-            <div class="start">
-              <strong>STARTS</strong> 12:30 JAN 2015
-              <span></span>
-            </div>
-            <div class="ends">
-              <strong>ENDS</strong> 14:30 JAN 2015
-            </div>
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="stats">
-
-            <div>
-              <strong>INVITED</strong> 3098
-            </div>
-
-            <div>
-              <strong>JOINED</strong> 562
-            </div>
-
-            <div>
-              <strong>DECLINED</strong> 182
-            </div>
-
-          </div>
-
-          <div class="footer">
-            <a href="#" class="Cbtn Cbtn-primary">View</a>
-            <a href="#" class="Cbtn Cbtn-danger">Delete</a>
-          </div>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Deploy Cluster</button>
       </div>
     </div>
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/index.js"></script>
