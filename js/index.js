@@ -137,7 +137,6 @@ function initCreateClusterModal(){
           dataType: 'json',
           contentType: 'application/json'
         }).done(function(clusters) {
-          console.log(err)
           loadClusters();
           return false;
         })
