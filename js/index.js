@@ -1,6 +1,6 @@
 var baseURL = `https://webhooks.mongodb-realm.com/api/client/v2.0/app/atlasconfigurator-xyznk/service/Atlas/incoming_webhook`
-var instances = [
-  {
+var clusterDescripton = 'Development Prototype';
+var instances = [{
     "instance_size": "M2",
     "default_storage": "2 GB",
     "default_ram": "Shared"
@@ -104,6 +104,57 @@ function grabInstance(instanceName) {
   });
 }
 
+function initCreateClusterModal(){
+  $( "#createClusterModal" ).on('shown.bs.modal', function(){
+    // cleanup
+    let feedbackText = $('#createClusterFeedback')
+    feedbackText.html('');
+
+    // build select box
+    var select = $('#createClusterRAMSelect');
+    $.each(instances, function(index, instance) {
+      select.append(`<option value="${instance.instance_size}">${instance.default_ram}</option>`);
+    })
+    //
+    $("#createClusterForm").on("submit", function(){
+      // build json
+      var obj = {};
+      $.each($(this).serializeArray(), function() {
+        // convert str to int
+        obj[this.name] = this.value;
+
+        // fix up
+        if (this.name == 'diskSizeGB'){
+          obj.diskSizeGB = parseInt(this.value)
+        }
+        obj.clusterDescription = clusterDescripton;
+      });
+      // send json to api
+      $.ajax({
+          url: `${baseURL}/createCluster`,
+          method: 'POST',
+          data: JSON.stringify(obj),
+          dataType: 'json',
+          contentType: 'application/json'
+        }).done(function(clusters) {
+          console.log(err)
+          loadClusters();
+          return false;
+        })
+        .fail(function(err) {
+          console.log(err)
+          feedbackText.html(err.responseJSON.error)
+          return false;
+        });
+
+        return false;
+
+    })
+  });
+
+}
+
+
 
 function loadClusters() {
   $.ajax({
@@ -121,10 +172,16 @@ function renderClusters(clusters) {
   // empty
   placeholder.html("");
   // let html = ``;
-  console.log(clusters)
   $.each(clusters, function(index, cluster) {
 
     let instance = grabInstance(cluster.providerSettings.instanceSizeName)[0];
+
+    let tags = ``
+    cluster.labels.forEach(function(tag) {
+      if (tag.value !== 'undefined'){
+        tags += `<span>${tag.value}</span>`;
+      }
+    });
 
     let html = `
     <div class="col-md-4 cluster-box" data-id="${cluster.id}">
@@ -140,7 +197,9 @@ function renderClusters(clusters) {
             </div>
           </div>
 
-
+            <div class="item-content-block tags">
+              ${tags}
+            </div>
 
           <div class="dates">
             <div class="start">
@@ -183,9 +242,79 @@ function renderClusters(clusters) {
   // init
   initDeleteButtons();
   initPauseButtons();
+  // initSelects();
+  initModifyButtons();
 }
 
 // init buttons
+
+function initModifyButtons() {
+
+  let placeholder = $('#modifyModalPlaceholder');
+  var modifyButtons = $(`.modify-button`);
+
+  $.each(modifyButtons, function(index, button) {
+    $(button).click(function(e) {
+
+      // build modal
+      let html = `
+        <div class="modal fade center-modal" id="modifyClusterModal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modify Cluster</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                      <input type="name" class="form-control" placeholder="Cluster Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">RAM</label>
+                    <div class="col-sm-10">
+                      <select name="ram" class="form-control">
+                        <option>1</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Storage</label>
+                    <div class="col-sm-10">
+                      <select name="storage" class="form-control">
+                        <option>1</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Version</label>
+                    <div class="col-sm-10">
+                      <select name="version" class="form-control">
+                        <option>1</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Modify Cluster</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `
+      placeholder.html(html);
+
+      $('#modifyClusterModal').modal('toggle');
+    })
+  })
+
+}
 
 function initPauseButtons() {
   var pauseButtons = $(`.pause-button`);
@@ -201,7 +330,12 @@ function initPauseButtons() {
       $.ajax({
           url: `${baseURL}/pauseCluster`,
           method: 'PATCH',
-          data: JSON.stringify({"clusterName":item.attr('data-name'), "paused":true})
+          data: JSON.stringify({
+            "clusterName": item.attr('data-name'),
+            "paused": true
+          }),
+          dataType: 'json',
+          contentType: 'application/json'
         }).done(function(clusters) {
           loadClusters();
         })
@@ -239,4 +373,5 @@ function initDeleteButtons() {
 
 $(document).ready(function() {
   loadClusters();
+  initCreateClusterModal();
 });
