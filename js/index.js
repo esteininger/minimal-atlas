@@ -1,5 +1,4 @@
 var baseURL = `https://webhooks.mongodb-realm.com/api/client/v2.0/app/atlasconfigurator-xyznk/service/Atlas/incoming_webhook`
-var clusterDescripton = 'Development Prototype';
 var instances = [{
     "instance_size": "M2",
     "default_storage": "2 GB",
@@ -127,7 +126,6 @@ function initCreateClusterModal(){
         if (this.name == 'diskSizeGB'){
           obj.diskSizeGB = parseInt(this.value)
         }
-        obj.clusterDescription = clusterDescripton;
       });
       // send json to api
       $.ajax({
