@@ -112,8 +112,9 @@ function initCreateClusterModal(){
 
     // build select box
     var select = $('#createClusterRAMSelect');
+    select.empty();
     $.each(instances, function(index, instance) {
-      select.append(`<option value="${instance.instance_size}">${instance.default_ram}</option>`);
+      select.append(`<option value="${instance.instance_size}">${instance.instance_size} - ${instance.default_ram} RAM</option>`);
     })
     //
     $("#createClusterForm").on("submit", function(){
@@ -138,16 +139,16 @@ function initCreateClusterModal(){
           contentType: 'application/json'
         }).done(function(clusters) {
           loadClusters();
-          return false;
+          // reset
+          $('#createClusterForm')[0].reset();
+          $('#createClusterModal').modal('toggle');
+
         })
         .fail(function(err) {
           console.log(err)
-          feedbackText.html(err.responseJSON.error)
-          return false;
+          feedbackText.html(err.responseJSON.detail)
         });
-
-        return false;
-
+      return false;
     })
   });
 
@@ -320,20 +321,19 @@ function initPauseButtons() {
 
   $.each(pauseButtons, function(index, button) {
     $(button).click(function(e) {
-      let item = $(this);
       // let paused = false;
 
       // TODO: check if pause or resume and modify accordingly
-
+      let data = {
+        "clusterName": $(this).attr('data-name'),
+        "paused": true
+      };
 
       $.ajax({
           url: `${baseURL}/pauseCluster`,
-          method: 'PATCH',
-          data: JSON.stringify({
-            "clusterName": item.attr('data-name'),
-            "paused": true
-          }),
+          method: 'POST',
           dataType: 'json',
+          data: JSON.stringify(data),
           contentType: 'application/json'
         }).done(function(clusters) {
           loadClusters();
