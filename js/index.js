@@ -127,6 +127,13 @@ function initCreateClusterModal(){
           obj.diskSizeGB = parseInt(this.value)
         }
       });
+      // error handler
+      function handleCreateError(err){
+        console.log(err)
+        feedbackText.html(JSON.stringify(err))
+        return false;
+      }
+
       // send json to api
       $.ajax({
           url: `${baseURL}/createCluster`,
@@ -134,14 +141,14 @@ function initCreateClusterModal(){
           data: JSON.stringify(obj),
           dataType: 'json',
           contentType: 'application/json'
-        }).done(function(clusters) {
+        }).done(function(msg) {
+          if (msg.error.$numberInt == "400"){
+            handleCreateError(msg)
+          }
           loadClusters();
-          return false;
         })
         .fail(function(err) {
-          console.log(err)
-          feedbackText.html(err.responseJSON.error)
-          return false;
+          handleCreateError(err)
         });
 
         return false;
@@ -326,7 +333,7 @@ function initPauseButtons() {
 
       $.ajax({
           url: `${baseURL}/pauseCluster`,
-          method: 'PATCH',
+          method: 'POST',
           data: JSON.stringify({
             "clusterName": item.attr('data-name'),
             "paused": true
