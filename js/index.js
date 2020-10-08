@@ -142,7 +142,7 @@ function initCreateClusterModal(){
           dataType: 'json',
           contentType: 'application/json'
         }).done(function(msg) {
-          if (msg.error.$numberInt == "400"){
+          if ("error" in msg){
             handleCreateError(msg)
           }
           loadClusters();
