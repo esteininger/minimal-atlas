@@ -190,3 +190,7 @@ div.footer a.Cbtn-danger:hover {
 .tags span:hover {
   background-color: #a38018;
 }
+
+#createClusterFeedback {
+  color:red;
+}

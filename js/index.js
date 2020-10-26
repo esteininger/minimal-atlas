@@ -96,6 +96,7 @@ var instances = [{
   }
 ]
 
+// helper functions
 
 function grabInstance(instanceName) {
   return $.map(instances, function(e, i) {
@@ -103,8 +104,21 @@ function grabInstance(instanceName) {
   });
 }
 
-function initCreateClusterModal(){
-  $( "#createClusterModal" ).on('shown.bs.modal', function(){
+function clearModal(formObject, modalID) {
+  // reset form
+  formObject.trigger('reset');
+
+  // close active modal
+  modalID.modal('toggle');
+
+}
+
+// end helper functions
+
+// ~*~*~* createClusterModal ~~~*~*~~*
+
+function initCreateClusterModal() {
+  $("#createClusterModal").on('shown.bs.modal', function() {
     // cleanup
     let feedbackText = $('#createClusterFeedback')
     feedbackText.html('');
@@ -112,25 +126,26 @@ function initCreateClusterModal(){
     // build select box
     var select = $('#createClusterRAMSelect');
     $.each(instances, function(index, instance) {
-      select.append(`<option value="${instance.instance_size}">${instance.default_ram}</option>`);
+      select.append(`<option value="${instance.instance_size}">${instance.default_ram} - ${instance.instance_size}</option>`);
     })
     //
-    $("#createClusterForm").on("submit", function(){
+    $("#createClusterForm").on("submit", function() {
       // build json
       var obj = {};
-      $.each($(this).serializeArray(), function() {
+      var form = $(this);
+      $.each(form.serializeArray(), function() {
         // convert str to int
         obj[this.name] = this.value;
 
         // fix up
-        if (this.name == 'diskSizeGB'){
+        if (this.name == 'diskSizeGB') {
           obj.diskSizeGB = parseInt(this.value)
         }
       });
       // error handler
-      function handleCreateError(err){
+      function handleCreateError(err) {
         console.log(err)
-        feedbackText.html(JSON.stringify(err))
+        feedbackText.html(JSON.stringify(err.detail))
         return false;
       }
 
@@ -142,16 +157,19 @@ function initCreateClusterModal(){
           dataType: 'json',
           contentType: 'application/json'
         }).done(function(msg) {
-          if ("error" in msg){
+          if ("error" in msg) {
             handleCreateError(msg)
+          } else {
+            loadClusters();
+            // reset modal
+            clearModal(form, $('#createClusterModal'));
           }
-          loadClusters();
         })
         .fail(function(err) {
           handleCreateError(err)
         });
 
-        return false;
+      return false;
 
     })
   });
@@ -159,6 +177,7 @@ function initCreateClusterModal(){
 }
 
 
+// ~*~*~* page load ~~~*~*~~*
 
 function loadClusters() {
   $.ajax({
@@ -182,7 +201,7 @@ function renderClusters(clusters) {
 
     let tags = ``
     cluster.labels.forEach(function(tag) {
-      if (tag.value !== 'undefined'){
+      if (tag.value !== 'undefined') {
         tags += `<span>${tag.value}</span>`;
       }
     });
@@ -250,7 +269,10 @@ function renderClusters(clusters) {
   initModifyButtons();
 }
 
-// init buttons
+// ~*~*~* end page load ~~~*~*~~*
+
+
+// ~*~*~* init buttons ~~~*~*~~*
 
 function initModifyButtons() {
 
@@ -372,7 +394,7 @@ function initDeleteButtons() {
 
 }
 
-// end init buttons
+// ~*~*~* end init buttons ~~~*~*~~*
 
 
 $(document).ready(function() {
