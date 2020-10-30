@@ -107,10 +107,10 @@ function grabInstance(instanceName) {
 function clearModal(formObject, modalID) {
   // reset form
   formObject.trigger('reset');
-
+  // remove so no duplicates
+  formObject.unbind('submit');
   // close active modal
   modalID.modal('toggle');
-
 }
 
 // end helper functions
@@ -128,16 +128,17 @@ function initCreateClusterModal() {
     $.each(instances, function(index, instance) {
       select.append(`<option value="${instance.instance_size}">${instance.default_ram} - ${instance.instance_size}</option>`);
     })
-    //
+
     $("#createClusterForm").on("submit", function() {
       // build json
       var obj = {};
       var form = $(this);
+
       $.each(form.serializeArray(), function() {
         // convert str to int
         obj[this.name] = this.value;
 
-        // fix up
+        // convert str to int
         if (this.name == 'diskSizeGB') {
           obj.diskSizeGB = parseInt(this.value)
         }
