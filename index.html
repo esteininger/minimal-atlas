@@ -4,6 +4,22 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
 
+
+<script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+<script>
+  // https://docs.mongodb.com/realm/web/authenticate/#google-oauth
+  const client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
+  document.write('<br><br><br><br><br><br>');
+
+  if (client.auth.authInfo.loggedInProviderName === "oauth2-google") {
+    document.write("Hello, " + client.auth.authInfo.userProfile.data.first_name);
+    document.write('<br><br>');   
+    document.write("<img src=" + client.auth.authInfo.userProfile.data.picture + ">");
+  } else {
+    document.write("Plese Login");
+  }
+</script>
+
 <div class="container-fluid">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top left-right-padding">
@@ -11,6 +27,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0 ml-auto float-xs-right" type="submit" data-toggle="modal" data-target="#createClusterModal">
       Create Cluster
     </button>
+    <a href="login.html">Login</a>
   </nav>
 
   <div class="container">
@@ -19,8 +36,6 @@
     </div>
   </div>
 </div>
-
-
 
 <div class="modal fade center-modal" id="createClusterModal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -90,3 +105,5 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="js/bootstrap-tagsinput.js"></script>
 <script src="js/index.js"></script>
+
+ 
