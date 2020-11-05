@@ -398,7 +398,22 @@ function initDeleteButtons() {
 // ~*~*~* end init buttons ~~~*~*~~*
 
 
+function handleCreateButton(){
+    // put cookie in
+    let stitchKey = '__stitch.client.atlasconfigurator-xyznk.auth_info'
+    let stitchObj = localStorage.getItem( localStorage.key( stitchKey ) )
+    if (stitchObj == null){
+      // your code here.
+      $('#create-cluster-header-button').hide();
+    }
+    else {
+      $('#login-header-button').hide();
+    }
+    console.log(stitchObj)
+}
+
 $(document).ready(function() {
   loadClusters();
   initCreateClusterModal();
+  handleCreateButton();
 });

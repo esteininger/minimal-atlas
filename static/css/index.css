@@ -194,3 +194,7 @@ div.footer a.Cbtn-danger:hover {
 #createClusterFeedback {
   color:red;
 }
+nav.navbar {
+  margin-left: 10em;
+margin-right: 10em;
+}

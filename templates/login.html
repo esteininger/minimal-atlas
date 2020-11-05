@@ -4,6 +4,7 @@
        <script>
           const client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
 
+
           if (client.auth.hasRedirectResult()) {
               client.auth.handleRedirectResult().then(user => {
                   let redirectUrl = localStorage.getItem('redirectUrl');
@@ -14,7 +15,7 @@
                   window.location.replace(redirectUrl);
               })
           }
-          
+
 
 
           client.auth.logout().then(function() {
@@ -24,9 +25,7 @@
 
             let credential = new stitch.GoogleRedirectCredential();
             client.auth.loginWithRedirect(credential);
-
           });
-          
 
 
        </script>
