@@ -1,3 +1,7 @@
+import {
+  getClusters
+} from './webhooks.js'
+
 var baseURL = `https://webhooks.mongodb-realm.com/api/client/v2.0/app/atlasconfigurator-xyznk/service/Atlas/incoming_webhook`
 var instances = [
   {
@@ -102,14 +106,8 @@ function initCreateClusterModal() {
 // ~*~*~* page load ~~~*~*~~*
 
 function loadClusters() {
-  $.ajax({
-      url: `${baseURL}/getClusters`
-    }).done(function(clusters) {
-      renderClusters(clusters)
-    })
-    .fail(function(err) {
-      console.log(err)
-    });
+    getClusters()
+      .then (clusters => renderClusters(clusters))
 }
 
 function renderClusters(clusters) {
