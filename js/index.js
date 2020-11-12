@@ -326,9 +326,11 @@ function handleCreateButton(){
       $('#create-cluster-header-button').hide();
     }
     else {
-      $('#login-header-button').hide();
+      //$('#login-header-button').hide();
     }
+  
     console.log(stitchObj)
+    console.log(JSON.parse(stitchObj).user_id);
 }
 
 $(document).ready(function() {

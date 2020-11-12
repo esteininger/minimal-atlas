@@ -20,7 +20,6 @@
       <script>
         // https://docs.mongodb.com/realm/web/authenticate/#google-oauth
         const client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
-        // document.write('<br><br><br><br><br><br>');
 
         if (client.auth.authInfo.loggedInProviderName === "oauth2-google") {
           document.write("Hello, " + client.auth.authInfo.userProfile.data.first_name);
