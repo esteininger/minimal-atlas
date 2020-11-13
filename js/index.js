@@ -321,16 +321,22 @@ function handleCreateButton(){
     // put cookie in
     let stitchKey = '__stitch.client.atlasconfigurator-xyznk.auth_info'
     let stitchObj = localStorage.getItem( localStorage.key( stitchKey ) )
+
     if (stitchObj == null){
       // your code here.
       $('#create-cluster-header-button').hide();
     }
     else {
-      //$('#login-header-button').hide();
+
+      let user_id = JSON.parse(stitchObj).user_id;
+
+      if (typeof user_id !== 'undefined') {
+        console.log(user_id);
+        localStorage.setItem('user_id', user_id);
+        $('#login-header-button').hide();
+      } 
     }
-  
     console.log(stitchObj)
-    console.log(JSON.parse(stitchObj).user_id);
 }
 
 $(document).ready(function() {
