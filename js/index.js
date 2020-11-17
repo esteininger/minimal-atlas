@@ -307,6 +307,7 @@ function initDeleteButtons() {
 
 function handleCreateButton() {
   // put cookie in
+  // https://docs.mongodb.com/realm/authentication/#user-sessions
   let stitchKey = "__stitch.client.atlasconfigurator-xyznk.auth_info";
   let stitchObj = localStorage.getItem(localStorage.key(stitchKey));
 
