@@ -4,27 +4,51 @@ export const getClusters = (uid) => {
   return fetchHelper(`${baseURL}/getClusters`, uid);
 };
 
+export const createCluster = (uid, data) => {
+  let url = `${baseURL}/createCluster`
+
+  const params = {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+      ...(uid && { Authorization: uid })
+    },
+    ...(data && { body: JSON.stringify(data) })
+  }
+
+  //return fetchHelper(url, uid, data);
+  return fetch(url, params)
+  .then(handleErrors)
+  .then(response => response.json())
+  .catch(error => console.log(error) );    
+
+};
+
 /// Helper Functions
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  //if (response.json().error) {
+  //  throw Error(response);
+  //}
+  return response;
+}
+
 const fetchHelper = (url, uid, data) => {
   const params = {
     method: data ? "post" : "get",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
-      ...(uid && { Authorization: uid }),
+      ...(uid && { Authorization: uid })
     },
-    ...(data && { body: JSON.stringify(data) }),
+    ...(data && { body: JSON.stringify(data) })
   };
 
   return fetch(url, params)
     .then(handleErrors)
     .then(response => response.json())
-    //.then(data => console.log(data))
     .catch(error => console.log(error) );    
 };
 
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
+
