@@ -75,7 +75,9 @@ function initCreateClusterModal() {
         return false;
       }
 
-      createCluster("1", obj).then((result) => {
+      let userId = client.auth.authInfo.userId;
+
+      createCluster(userId, obj).then((result) => {
         if (result.error) {
           console.log(result);
         } else {
