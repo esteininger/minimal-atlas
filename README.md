@@ -1,7 +1,7 @@
 # minimal-atlas
 Minimalistic Atlas UI to grant developers the ability to quickly deploy an Atlas cluster while shielding them from the full power of the standard Atlas UI.
 ## To run
-```npm serve```
+```npx serve```
 ## To use
 ### first, create a cluster using the create cluster button
 
