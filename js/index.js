@@ -1,5 +1,8 @@
 import { createCluster, getClusters } from "./webhooks.js";
 
+//require('dotenv').config();
+//console.log(process.ATLAS_USER);
+
 var baseURL = `https://webhooks.mongodb-realm.com/api/client/v2.0/app/atlasconfigurator-xyznk/service/Atlas/incoming_webhook`;
 var instances = [
   {
@@ -308,28 +311,22 @@ function initDeleteButtons() {
 // ~*~*~* end init buttons ~~~*~*~~*
 
 function handleCreateButton() {
-  // put cookie in
-  // https://docs.mongodb.com/realm/authentication/#user-sessions
-  let stitchKey = "__stitch.client.atlasconfigurator-xyznk.auth_info";
-  let stitchObj = localStorage.getItem(localStorage.key(stitchKey));
+  let userId = client.auth.authInfo.userId;
+  console.log (userId);
 
-  if (stitchObj == null || stitchObj == "oauth2-google") {
-    // your code here.
-    $("#create-cluster-header-button").hide();
+  if (typeof userId !== "undefined") {
+    // The user is logged in
+    console.log(userId);
+    $("#login-header-button").hide();
   } else {
-    let parsedStitchObj = JSON.parse(stitchObj);
-    let user_id = parsedStitchObject.user_id;
-
-    if (typeof user_id !== "undefined") {
-      console.log(user_id);
-      localStorage.setItem("user_id", user_id);
-      $("#login-header-button").hide();
-    }
+    // The user needs to log in
+    $("#create-cluster-header-button").hide();
+    console.log("undefined");
   }
 }
 
 $(document).ready(function () {
   loadClusters();
   initCreateClusterModal();
-  //handleCreateButton();
+  handleCreateButton();
 });

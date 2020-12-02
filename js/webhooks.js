@@ -37,9 +37,11 @@ function handleErrors(response) {
 
 const fetchHelper = (url, uid, data) => {
   const params = {
+    //mode: "no-cors",
     method: data ? "post" : "get",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
+      //'Access-Control-Allow-Origin': '*',
       ...(uid && { Authorization: uid })
     },
     ...(data && { body: JSON.stringify(data) })
