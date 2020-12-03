@@ -1,8 +1,5 @@
 import { createCluster, getClusters } from "./webhooks.js";
 
-//require('dotenv').config();
-//console.log(process.ATLAS_USER);
-
 var baseURL = `https://webhooks.mongodb-realm.com/api/client/v2.0/app/atlasconfigurator-xyznk/service/Atlas/incoming_webhook`;
 var instances = [
   {
@@ -95,6 +92,10 @@ function initCreateClusterModal() {
 }
 
 // ~*~*~* page load ~~~*~*~~*
+
+function initPage() {
+  document.title = "Mini Atlas";
+}
 
 function loadClusters() {
   getClusters().then((clusters) => renderClusters(clusters));
@@ -312,7 +313,7 @@ function initDeleteButtons() {
 
 function handleCreateButton() {
   let userId = client.auth.authInfo.userId;
-  console.log (userId);
+  console.log(userId);
 
   if (typeof userId !== "undefined") {
     // The user is logged in
@@ -326,6 +327,7 @@ function handleCreateButton() {
 }
 
 $(document).ready(function () {
+  initPage();
   loadClusters();
   initCreateClusterModal();
   handleCreateButton();
