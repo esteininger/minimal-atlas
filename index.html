@@ -5,9 +5,7 @@
 
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css' />
 
-<script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
 
-<script src="/js/authentication.js"></script>
 
 <div class="container-fluid">
 
@@ -15,30 +13,20 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="navbar-brand" href="#">Minimal Atlas</a>
+          <span class="navbar-brand" href="#">Minimal Atlas</span>
         </li>
       </ul>
     </div>
     <div class="mx-auto order-0">
       <script>
-        //https://docs.mongodb.com/realm/web/authenticate/#google-oauth
-        const client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
 
-        if (client.auth.authInfo.loggedInProviderName === "oauth2-google") {
-          document.write("Hello, " + client.auth.authInfo.userProfile.data.first_name);
-          document.write('<br><br>');
-          document.write("<img src=" + client.auth.authInfo.userProfile.data.picture + ">");
-        } else {
-          document.write("Plese Login");
-        }
-
-        document.title = "Mini Atlas";
-
-        console.log(client.auth.authInfo);
       </script>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item temp greeting"></li>
+        <li class="nav-item temp profile-pic"></li>
+
         <li class="nav-item">
           <button id="create-cluster-header-button" class="btn btn-outline-success" type="submit" data-toggle="modal"
             data-target="#createClusterModal">
@@ -47,9 +35,9 @@
         </li>
 
         <li class="nav-item">
-          <button id="login-header-button" class="btn btn-outline-info">
-            <a href="login.html">Login</a>
-          </button>
+          <a href="login.html"><button id="login-header-button" class="btn btn-outline-info">
+            Login
+          </button></a>
         </li>
 
       </ul>
@@ -129,4 +117,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
   integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="/js/bootstrap-tagsinput.js"></script>
+
+<script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+<script src="/js/authentication.js"></script>
+
 <script type="module" src="/js/index.js"></script>

@@ -1,5 +1,8 @@
 import { createCluster, getClusters } from "./webhooks.js";
 
+var client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
+
+
 //require('dotenv').config();
 //console.log(process.ATLAS_USER);
 
@@ -111,7 +114,8 @@ function renderClusters(clusters) {
     let tags = ``;
     cluster.labels.forEach(function (tag) {
       if (tag.value !== "undefined") {
-        tags += `<span><b>${tag.key}</b>: ${tag.value}</span>`;
+        tags += `<tr><th scope="row">${tag.key}</th><td>${tag.value}</td></tr>`;
+
       }
     });
 
@@ -133,8 +137,14 @@ function renderClusters(clusters) {
             </div>
           </div>
 
-            <div class="item-content-block tags">
-              ${tags}
+            <div class="item-content-block tags padding-modified">
+              <table class="table">
+                <tbody>
+                  <tr>
+                    ${tags}
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
           <div class="dates">
@@ -325,7 +335,24 @@ function handleCreateButton() {
   }
 }
 
+function handleAuth(){
+  //https://docs.mongodb.com/realm/web/authenticate/#google-oauth
+
+  if (client.auth.authInfo.loggedInProviderName === "oauth2-google") {
+    $('.greeting').html(`<span>Hello, ${client.auth.authInfo.userProfile.data.first_name}</span>`);
+    $('.profile-pic').html(`<img src="${client.auth.authInfo.userProfile.data.picture}">`);
+  } else {
+    // document.write("Plese Login");
+    $('.container').html('<span class="login-text">Please Login</span>')
+  }
+
+  document.title = "Mini Atlas";
+
+  console.log(client.auth.authInfo);
+}
+
 $(document).ready(function () {
+  handleAuth();
   loadClusters();
   initCreateClusterModal();
   handleCreateButton();

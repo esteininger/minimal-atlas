@@ -198,3 +198,31 @@ nav.navbar {
   margin-left: 10em;
 margin-right: 10em;
 }
+
+.cluster-box .table {
+  font-size: 11px;
+}
+.cluster-box .padding-modified {
+  padding: 5px 20px 5px 20px;
+}
+
+.login-text {
+  padding-top: 5em;
+  display: block;
+  font-size: 20px;
+}
+
+.nav-item.temp {
+  padding-left:1em;
+  padding-right:1em;
+}
+
+.nav-item.profile-pic img{
+  height: 120%;
+  margin-right:4em;
+  border-radius: 10%;
+
+}
+.nav-item.greeting span{
+  font-size:16px;
+}
