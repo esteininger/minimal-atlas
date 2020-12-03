@@ -1,37 +1,16 @@
+<script src="/js/authentication.js"></script>
+
 <html>
-    <head>
-       <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
-       <script>
-          const client = stitch.Stitch.initializeDefaultAppClient('atlasconfigurator-xyznk');
 
+<head>
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.6.0/stitch.js"></script>
+    <script>
+        loginGoogle();
+    </script>
+</head>
 
-          if (client.auth.hasRedirectResult()) {
-              client.auth.handleRedirectResult().then(user => {
-                  let redirectUrl = localStorage.getItem('redirectUrl');
+<body>
 
-                  if (!redirectUrl) {
-                      redirectUrl = "index.html";
-                  }
-                  window.location.replace(redirectUrl);
-              })
-          }
+</body>
 
-
-
-          client.auth.logout().then(function() {
-
-            // Store the URL of the page the user was on previously to redirect back to the page after authentication
-            localStorage.setItem('redirectUrl', document.referrer)
-
-            let credential = new stitch.GoogleRedirectCredential();
-            client.auth.loginWithRedirect(credential);
-          });
-
-
-       </script>
-    </head>
-
-    <body>
-
-    </body>
 </html>
