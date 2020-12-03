@@ -99,6 +99,10 @@ function initCreateClusterModal() {
 
 // ~*~*~* page load ~~~*~*~~*
 
+function initPage() {
+  document.title = "Mini Atlas";
+}
+
 function loadClusters() {
   getClusters().then((clusters) => renderClusters(clusters));
 }
@@ -322,7 +326,7 @@ function initDeleteButtons() {
 
 function handleCreateButton() {
   let userId = client.auth.authInfo.userId;
-  console.log (userId);
+  console.log(userId);
 
   if (typeof userId !== "undefined") {
     // The user is logged in
@@ -353,6 +357,7 @@ function handleAuth(){
 
 $(document).ready(function () {
   handleAuth();
+  initPage();
   loadClusters();
   initCreateClusterModal();
   handleCreateButton();
